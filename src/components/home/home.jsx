@@ -22,11 +22,11 @@ export const Home = () => {
     return (
         <div style={{backgroundImage: `url(${backgroundImg})`, backgroundSize: 'cover'}}>
             
-            <Toolbar style={{color: '#6e5b37', backgroundColor: '#edb340'}}>
+            {/* <Toolbar style={{color: '#6e5b37', backgroundColor: '#edb340'}}>
                 <Typography variant="h4">
                     DEMO SITE :)
                 </Typography>
-            </Toolbar>
+            </Toolbar> */}
 
             <Grid sx={{
                 display: 'grid',
