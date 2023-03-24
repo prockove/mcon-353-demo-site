@@ -1,11 +1,20 @@
-import React, { useState } from "react";
-import { Box, Typography, TextField, ListItem } from "@mui/material";
+import React, { useState, useContext } from "react";
+import {
+  Box,
+  Typography,
+  TextField,
+  ListItem,
+  IconButton,
+  Icon,
+} from "@mui/material";
 import backgroundImg from "../../images/backgroundImg.jpg";
 import { Delete, CheckCircleOutline, Add } from "@mui/icons-material";
+import { TodoContext } from "../../state/todo/todo-context";
+import { TodoActions } from "../../state/todo/todo.reducer";
 
 export const Todo = () => {
   const [input, setInput] = useState("");
-  const [todos, setTodos] = useState([]);
+  const { todoState, todoDispatch } = useContext(TodoContext);
 
   const onInput = (event) => {
     console.log(event.target.value);
@@ -13,27 +22,25 @@ export const Todo = () => {
   };
 
   const addTodo = () => {
-    setTodos([...todos, { title: input, isComplete: false }]);
+    todoDispatch({
+      type: TodoActions.ADD,
+      todo: { title: input, isComplete: false },
+    });
     setInput("");
-    console.log(todos);
   };
 
-  const deleteTodo = (task) => {
-    const index = todos.indexOf(task);
-    if (index !== -1) {
-      setTodos([
-        ...todos.slice(0, index),
-        ...todos.slice(index + 1, todos.length),
-      ]);
-    }
-    console.log(todos);
+  const deleteTodo = (todo) => {
+    todoDispatch({
+      type: TodoActions.DELETE,
+      todo,
+    });
   };
 
   const toggleChecked = (todo) => {
-    const newTodos = [...todos];
-    const updatedTodo = newTodos.find((x) => x.title === todo.title);
-    updatedTodo.isComplete = !todo.isComplete;
-    setTodos(newTodos);
+    todoDispatch({
+      type: TodoActions.TOGGLE,
+      todo,
+    });
   };
 
   return (
@@ -81,19 +88,22 @@ export const Todo = () => {
           <Add onClick={addTodo} size="small" sx={{ color: "blue" }} />
         </Box>
         <hr />
-        {todos.map((todo, index) => (
+        {todoState.todos.map((todo) => (
           <ListItem
-            key={index}
+            key={todo.title}
             divider={true}
             secondaryAction={
               <>
-                <CheckCircleOutline
-                  checked={todo.isComplete}
-                  onClick={() => toggleChecked(todo)}
-                  fontSize="small"
-                  sx={todo.isComplete ? { color: "green" } : { color: "red" }}
-                />
-                <Delete onClick={() => deleteTodo(todo)} fontSize="small" />
+                <IconButton onClick={() => toggleChecked(todo)}>
+                  <CheckCircleOutline
+                    fontSize="small"
+                    sx={todo.isComplete ? { color: "green" } : { color: "red" }}
+                  />
+                </IconButton>
+
+                <IconButton onClick={() => deleteTodo(todo)}>
+                  <Delete fontSize="small" />
+                </IconButton>
               </>
             }
           >
