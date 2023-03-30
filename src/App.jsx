@@ -1,4 +1,3 @@
-import "./App.css";
 import { useReducer } from "react";
 import { Home } from "./components/home/home";
 import { Todo } from "./components/todo/todo";

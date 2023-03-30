@@ -18,7 +18,6 @@ const pages = [
 export function Header() {
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleCloseNavMenu = (page) => {
     setAnchorElNav(null);

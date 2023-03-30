@@ -5,7 +5,6 @@ import {
   TextField,
   ListItem,
   IconButton,
-  Icon,
 } from "@mui/material";
 import backgroundImg from "../../images/backgroundImg.jpg";
 import { Delete, CheckCircleOutline, Add } from "@mui/icons-material";

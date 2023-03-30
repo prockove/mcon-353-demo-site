@@ -26,12 +26,6 @@ export const Home = () => {
         backgroundSize: "cover",
       }}
     >
-      {/* <Toolbar style={{color: '#6e5b37', backgroundColor: '#edb340'}}>
-                <Typography variant="h4">
-                    DEMO SITE :)
-                </Typography>
-            </Toolbar> */}
-
       <Grid
         sx={{
           display: "grid",
